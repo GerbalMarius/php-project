@@ -1,0 +1,14 @@
+{
+    "name": "auto/marius",
+    "description": "project",
+    "type": "project",
+    "require": {
+        "illuminate/database": "^11.30"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Auto\\Marius\\": "src/"
+        }
+    }
+}
