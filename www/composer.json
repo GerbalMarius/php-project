@@ -3,7 +3,10 @@
     "description": "project",
     "type": "project",
     "require": {
-        "illuminate/database": "^11.30"
+        "illuminate/database": "^11.30",
+        "illuminate/support": "^11.30",
+        "opis/closure": "^3.6",
+        "laravel/serializable-closure": "^1.3"
     },
     "license": "MIT",
     "autoload": {

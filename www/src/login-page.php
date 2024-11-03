@@ -21,16 +21,16 @@ session_start();
 <body>
     <div class="form-box">
         <h1 class="form-heading">Prisijungkite</h1> <img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"><a class="smaller-img-top-left" href="../src"></a>
-        <form action="" method="post">
-            <label for="name" class="form-label">El.paštas:</label>
+        <form action="actions/login.php" method="post">
+            <label for="email" class="form-label">El.paštas:</label>
             <p></p>
-            <input type="text" name="name" class="form-input" maxlength="80" placeholder="Įveskite el paštą.">
+            <input type="email" name="email" class="form-input" maxlength="80" placeholder="Įveskite el paštą.">
             <p></p>
             <label for="password" class="form-label">Slaptažodis:</label>
             <p></p>
             <input type="password" name="password" class="form-input" maxlength="80" placeholder="Suveskite slaptažodį.">
             <p></p>
-            <input type="submit" class="form-submit" value="Log in">
+            <input type="submit" class="form-submit" value="Prisijungti">
             <p class="form-paragraph">Nesate užsiregistravę? Susikurkite paskyrą <a href="register-page.php" class="form-link">čia</a>.</p>
 
         </form>

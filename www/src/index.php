@@ -1,4 +1,4 @@
-<a?php
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
@@ -16,6 +16,17 @@ session_start();
 <body>
     <h1>Pagrinidinis puslapis</h1>
     <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php" style="text-decoration:none" class="smaller-img-top-right"></a>
+    <?php
+
+    use Models\User;
+    require __DIR__. "/config.php";
+    require __DIR__. '/../vendor/autoload.php';
+    if (isset($_SESSION['user_id'])) {
+        $user = User::find($_SESSION['user_id']);
+        echo "Prisijunges vartotojas: ".$user->email;
+        echo  "<a href='src/actions/logout.php'>Atsijungti</a>";
+    }
+    ?>
     <footer>
         © Marius Ambrazevičius IFF-2/4 KTU IF <?php echo date("Y")." m." ?>
     </footer>
