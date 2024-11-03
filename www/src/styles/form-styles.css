@@ -1,0 +1,82 @@
+.form-input{
+    width: 30rem;
+    padding: 15px;
+    margin-top: 10px;
+    margin-left: 10rem;
+    font-size: large;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+.form-input:hover{
+    box-shadow: 2px 2px 5px rgba(37, 37, 37, 0.94);
+}
+.form-input:focus{
+    box-shadow: 2px 2px 5px rgba(37, 37, 37, 0.94);
+}
+.form-label{
+    margin-left: 10rem;
+    font-family: 'Roboto' ,sans-serif;
+    font-size: larger;
+    font-weight: bold;
+}
+.form-submit{
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    color: white;
+    background-color: #000;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    padding: 20px;
+    margin: 0px auto;
+    margin-top: 10px;
+    margin-left: 13rem;
+    text-align: center;
+    width: 25rem;
+}
+.form-submit:hover{
+    background-color: #3a3939;
+}
+.form-box{
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 870px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+    display: block;
+}
+.form-heading{
+    margin-left: 10rem;
+    font-family: 'Roboto', sans-serif;
+}
+.form-radio{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    font-family: "Roboto", sans-serif;
+}
+.form-radio-label{
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 15rem;
+    font-family: "Roboto", sans-serif;
+}
+.form-paragraph{
+    font-family: 'Roboto', sans-serif;
+    margin-left: 15rem;
+}
+.form-link{
+    font-weight: bold;
+    color: black;
+}
+body {
+    min-height: 98vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+footer {
+    margin-top: auto;
+  }
