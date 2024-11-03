@@ -71,12 +71,3 @@
     font-weight: bold;
     color: black;
 }
-body {
-    min-height: 98vh;
-    display: flex;
-    flex-direction: column;
-}
-  
-footer {
-    margin-top: auto;
-  }

@@ -35,6 +35,10 @@ class ComposerStaticInit617713e04b5720d8994fdda21a3836f7
             'Psr\\Container\\' => 14,
             'Psr\\Clock\\' => 10,
         ),
+        'M' => 
+        array (
+            'Models\\' => 7,
+        ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
@@ -98,11 +102,15 @@ class ComposerStaticInit617713e04b5720d8994fdda21a3836f7
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
         ),
+        'Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Models',
+        ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/macroable',
+            0 => __DIR__ . '/..' . '/illuminate/collections',
             1 => __DIR__ . '/..' . '/illuminate/conditionable',
-            2 => __DIR__ . '/..' . '/illuminate/collections',
+            2 => __DIR__ . '/..' . '/illuminate/macroable',
             3 => __DIR__ . '/..' . '/illuminate/support',
         ),
         'Illuminate\\Database\\' => 
