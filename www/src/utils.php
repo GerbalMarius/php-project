@@ -1,4 +1,7 @@
 <?php
+use \Models\User;
+require __DIR__ . "/config.php";
+require __DIR__ . '/../vendor/autoload.php';
 function test_input($input): string  {
     $input = trim($input);
     $input = stripslashes($input);
@@ -10,5 +13,10 @@ function calculate_discount($price, $discount): float {
     $discount = round(floatval($discount) / 100, 1);
     
     return round($price - $price * $discount, 2);
+}
+
+function is_active_user($user_id): bool {
+    $actual_user = User::find($user_id);
+    return $actual_user->is_active;
 }
 ?>

@@ -25,7 +25,7 @@
 
 <body>
     <h1>Visos prekės</h1>
-    <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php"
+    <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"> <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php"
         style="text-decoration:none" class="smaller-img-top-right"></a>
     <?php
     if (isset($_SESSION['user_id'])) {
@@ -44,8 +44,9 @@
         echo "<p class ='item-title'>{$product->title}</p>";
         echo "<p class = 'item-text-general'>{$product->manufacturer}</p>";
         echo "<p class = 'item-text-general'>{$product->category} </p>";
-        echo "<p class = 'item-text-general'>Modelis </p>";
+        echo "<p class = 'item-text-general'>{$product->model} </p>";
         echo $price_text;
+        echo "<a href='' class='item-btn'>Į krepšelį</a>";
         echo "</div>";
     }
     echo "</div>";

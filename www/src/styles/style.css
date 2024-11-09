@@ -30,7 +30,7 @@ footer {
     position: absolute;
     color: black;
     top: 0px;
-    padding-right: 80px;
+    padding-right: 90px;
     right: 0px;
 }
 .error{
@@ -44,15 +44,24 @@ footer {
     grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
     gap: 20px;
     width: 30rem;
-    max-width: 100%; /* Ensures container doesn't exceed screen width */
+    max-width: 100%; 
 }
 
 .item {
     border: 2px solid black;
     padding: 20px;
-    width: 180px;
+    width: 200px;
     border-radius: 20px;
-    text-align: center; /* Centers content inside each item */
+    text-align: center; 
+}
+.item-btn{
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    text-decoration: none;
+    width: 60px;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 .item-title{
@@ -73,7 +82,7 @@ footer {
     color: red;
     text-align: left;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 15px;
 }
 .item-text-price::before{
@@ -83,6 +92,10 @@ footer {
 .item-text-general{
     color: #000;
     text-align: left;
+}
+.item-text-general::before{
+    content: "•";
+    color: black;
 }
 
 @media (max-width: 768px) {
@@ -108,7 +121,7 @@ footer {
     border-radius: 20px;
     position: absolute;
     top: 40px;
-    right: 140px;
+    right: 150px;
 }
 .logout-btn:hover{
     cursor: pointer;
