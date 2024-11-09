@@ -25,8 +25,8 @@
 
 <body>
     <h1>Visos prekės</h1>
-    <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"> <a href="src/cart-page.php"
-    style="text-decoration:none" class="smaller-img-top-right" style="margin-right: 40px;"></a>
+    <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
+    style="text-decoration:none" class="smaller-img-top-right" style="margin-right: 40px !important;"></a>
     <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php"
         style="text-decoration:none" class="smaller-img-top-right"></a>
     <?php
