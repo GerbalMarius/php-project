@@ -14,7 +14,7 @@ session_start();
     <title>Pagrindinis puslapis</title>
 </head>
 <body>
-    <h1>Pagrinidinis puslapis</h1>
+    <h1>Visos prekės</h1>
     <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php" style="text-decoration:none" class="smaller-img-top-right"></a>
     <?php
 

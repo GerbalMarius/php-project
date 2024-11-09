@@ -1,5 +1,12 @@
 <?php
 session_start();
+$url = "/www/src";
+
+if (isset($_SESSION['user_id'])) {
+    header("Location: $url");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,15 +27,36 @@ session_start();
 
 <body>
     <div class="form-box">
-        <h1 class="form-heading">Prisijungkite</h1> <img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"><a class="smaller-img-top-left" href="../src"></a>
+        <h1 class="form-heading">Prisijungkite</h1>
+        
+         <img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"><a class="smaller-img-top-left" href="../src"></a>
+        
         <form action="actions/login.php" method="post">
             <label for="email" class="form-label">El.paštas:</label>
             <p></p>
-            <input type="email" name="email" class="form-input" maxlength="80" placeholder="Įveskite el paštą.">
+            <input type="email" name="email" class="form-input" value="<?php echo htmlspecialchars($_SESSION['input_email'] ?? "") ?>" maxlength="80" placeholder="Įveskite el paštą.">
+            <?php
+            if (isset($_GET["email"])) {
+                echo "<span class = 'error'>*Įveskite el. paštą.</span>";
+            }
+    
+            if (isset($_GET["user"])) {
+                echo "<span class ='error'>Neteisingas el. paštas.</span>";
+            }  
+            
+            ?>
             <p></p>
             <label for="password" class="form-label">Slaptažodis:</label>
             <p></p>
-            <input type="password" name="password" class="form-input" maxlength="80" placeholder="Suveskite slaptažodį.">
+            <input type="password" name="password" class="form-input" value="<?php echo htmlspecialchars($_SESSION['input_password'] ?? "") ?>" maxlength="80" placeholder="Įveskite slaptažodį.">
+            <?php
+            if (isset($_GET["password"])) {
+                echo "<span class = 'error'>*Įveskite slaptažodį.</span>";
+            }
+            if (isset($_GET["mismatch"])) {
+                echo "<span class = 'error'>*Neteisingas slaptažodis.</span>";
+            }    
+            ?>
             <p></p>
             <input type="submit" class="form-submit" value="Prisijungti">
             <p class="form-paragraph">Nesate užsiregistravę? Susikurkite paskyrą <a href="register-page.php" class="form-link">čia</a>.</p>
