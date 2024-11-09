@@ -41,7 +41,7 @@ if (isset($_SESSION['user_id'])) {
             }
     
             if (isset($_GET["user"])) {
-                echo "<span class ='error'>Neteisingas el. paštas.</span>";
+                echo "<span class ='error'>*Neteisingas el. paštas.</span>";
             }  
             
             ?>
