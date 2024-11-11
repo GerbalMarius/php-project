@@ -26,7 +26,7 @@
 <body>
     <h1>Visos prekės</h1>
     <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
-    style="text-decoration:none" class="smaller-img-top-right" style="margin-right: 40px !important;"></a>
+    style="text-decoration:none; right:40px;" class="smaller-img-top-right"></a>
     <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php"
         style="text-decoration:none" class="smaller-img-top-right"></a>
     <?php
@@ -48,7 +48,7 @@
         echo "<p class = 'item-text-general'>{$product->category} </p>";
         echo "<p class = 'item-text-general'>{$product->model} </p>";
         echo $price_text;
-        echo "<a href='' class='item-btn'>Į krepšelį</a>";
+        echo "<a href='src/actions/to-cart.php?prod={$product->id}' class='item-btn'>Į krepšelį</a>";
         echo "</div>";
     }
     echo "</div>";

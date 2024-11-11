@@ -54,7 +54,8 @@ if (count($errs) > 0) {
     header("Location: $url?$query_string");
     exit;
 } else {
-    session_unset();
+    unset($_SESSION['input_email']);
+    unset($_SESSION['input_password']);
     $_SESSION['user_id'] = $user->id;
     header("Location: $url");
     exit;
