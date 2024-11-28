@@ -50,6 +50,8 @@ class ComposerStaticInit617713e04b5720d8994fdda21a3836f7
         ),
         'I' => 
         array (
+            'Intervention\\Image\\' => 19,
+            'Intervention\\Gif\\' => 17,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
@@ -122,6 +124,14 @@ class ComposerStaticInit617713e04b5720d8994fdda21a3836f7
         'Laravel\\SerializableClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
+        ),
+        'Intervention\\Image\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/image/src',
+        ),
+        'Intervention\\Gif\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/gif/src',
         ),
         'Illuminate\\Support\\' => 
         array (
