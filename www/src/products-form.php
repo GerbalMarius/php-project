@@ -22,7 +22,7 @@ session_start();
 
         <h1 class="form-heading">Naujos prekės įvedimas</h1>
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="actions/save-product.php" method="post" enctype="multipart/form-data">
             <label for="product_name" class="form-label">Prekės pavadinimas</label>
             <input class="form-input" type="text" name="product_name" maxlength="80">
             <p></p>

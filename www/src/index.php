@@ -47,6 +47,7 @@
         echo "<p class = 'item-text-general'>{$product->manufacturer}</p>";
         echo "<p class = 'item-text-general'>{$product->category} </p>";
         echo "<p class = 'item-text-general'>{$product->model} </p>";
+        echo Product::image_str($product->id);
         echo $price_text;
         echo "<a href='src/actions/to-cart.php?prod={$product->id}' class='item-btn'>Į krepšelį</a>";
         echo "</div>";
