@@ -63,7 +63,7 @@ session_start();
             ?>
             <p></p>
             <label for="birthdate" class="form-label">Pasirinkite gimimo datą:</label>
-            <input type="date" name="birthdate" class="form-input" lang="lt-LT" value="<?php echo htmlspecialchars($_SESSION['input_birthdate']) ?? ""; ?>">
+            <input type="date" name="birthdate" min="1920-01-01" max="<?php echo date('Y-m-d'); ?>" class="form-input" lang="lt-LT" value="<?php echo htmlspecialchars($_SESSION['input_birthdate']) ?? ""; ?>">
             <?php
             if (isset($_GET["birthdate"])) {
                 echo "<span class = 'error'>*Gim. data yra būtina.</span>";

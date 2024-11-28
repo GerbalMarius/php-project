@@ -19,6 +19,14 @@
     font-size: larger;
     font-weight: bold;
 }
+.form-upload{
+    margin-left: 10rem;
+    font-family: 'Roboto' ,sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    cursor: pointer;
+
+}
 .form-submit{
     font-family: 'Roboto', sans-serif;
     font-size: large;
