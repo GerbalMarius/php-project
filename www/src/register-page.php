@@ -78,7 +78,13 @@ session_start();
             }  
             ?>
             <p></p>
-
+            <label for="user_role" class="form-label">Vartotojo tipas:</label>
+            <select name="user_role" id="user_role" class="form-input" required>
+                <option value="1">Paprastas vartotojas</option>
+                <option value="2">Vadybininkas</option>
+                <option value="3">Administratorius</option>
+            </select>
+            <p></p>
             <input type="submit" value="Sukurti paskyrą" class="form-submit">
         </form>
     </div>

@@ -1,4 +1,6 @@
 <?php
+
+use Models\Role;
 session_start();
 require __DIR__ . "/../config.php";
 require __DIR__ . '/../../vendor/autoload.php';
@@ -70,6 +72,8 @@ if (count($errs) > 0) {
             "telephone_number" => test_input($_POST["telephone-number"])
         ]
     );
+    $selected_role = Role::find($_POST["user_role"]);
+    $user->roles()->attach($selected_role->id);
     session_unset();
     $_SESSION["user_id"] = $user->id;
     header("Location: $url");

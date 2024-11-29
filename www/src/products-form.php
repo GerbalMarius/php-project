@@ -47,7 +47,7 @@ session_start();
             <label class="form-label">Paveiksliukas</label>
             <p></p>
             <label class="form-upload" for="product_pict"><img src="images/upload-icon.svg" style="width: 60px; height:60px;"></label><span id="img-text"></span>
-            <input class="form-input" type="file" name="product_pict" style="display:none" id="product_pict"  accept="image/png, image/jpeg">
+            <input class="form-input" type="file" name="product_pict" style="display:none" id="product_pict"  accept="image/jpeg">
             <p></p>
             <input type="submit" class="form-submit" value="Išsaugoti prekę" >
         </form>
