@@ -108,6 +108,18 @@ tbody tr {
     padding: 10px;
     border-radius: 15px;
 }
+.green-btn-table{
+    color: white;
+    background-color: #088f1f;
+    position: relative;
+    cursor: pointer;
+    width: 100px;
+    text-decoration: none;
+    left: -175px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
 .items {
     margin: 0 auto;
     position: relative;
@@ -147,7 +159,7 @@ tbody tr {
     color: black;
     text-align: left;
     font-weight: bold;
-    margin-top: 60px;
+    margin-top: 30px;
     font-size: 20px;
 }
 .item-text-discount{

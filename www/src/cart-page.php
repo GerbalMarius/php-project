@@ -26,7 +26,7 @@ require __DIR__ . '/utils.php';
 <body>
     <img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"><a class="smaller-img-top-left"
         href="../src"></a>
-    <h1 style="margin-top:40px;">Placeholder for cart items</h1>
+    <h1 style="margin-top:40px;">Krepšelis</h1>
     <div class="wrapper">
     <table>
         <tbody>
@@ -36,6 +36,7 @@ require __DIR__ . '/utils.php';
                 <th>Modelis</th>
                 <th>Kategorija</th>
                 <th>Kaina</th>
+                <th>Kiekis</th>
             </tr>
             <tr>
                 <?php
@@ -44,13 +45,16 @@ require __DIR__ . '/utils.php';
                     echo "</tr>";
                 } else {
                     $items = $_SESSION["cart"];
-                    $price_sum = array_sum(array_column($_SESSION["cart"], "price"));
+                    $price_sum = "0";
                     foreach($items as $item) {
+                        $price_actual = bcmul($item["price"], $item["ordered_amount"],2);
+                        $price_sum = bcadd($price_sum, $price_actual ,2);
                         echo "<td>{$item["title"]}</td>";
                         echo "<td>{$item["manufacturer"]}</td>";
                         echo "<td>{$item["model"]}</td>";
                         echo "<td>{$item["category"]}</td>";
                         echo "<td>{$item["price"]}€</td>";
+                        echo "<td>X{$item["ordered_amount"]}</td>";
                         echo "</tr>";
                     }
                     echo"<tr><td colspan='5' style='text-align:right; font-weight:bold;'>Iš viso mokėti : {$price_sum}€</td></tr>";
@@ -61,6 +65,11 @@ require __DIR__ . '/utils.php';
         </tbody>
     </table>
     <a href='actions/clear-cart.php' class ='red-btn-table'>Valyti krepšelį</a>
+    <?php
+    if(!empty($_SESSION["cart"]) && !empty($_SESSION["user_id"]) && is_active_user( $_SESSION["user_id"])) {
+            echo "<a href='' class='green-btn-table'>Pateikti užsakymą</a>";
+    }
+    ?>    
     </div>
     <footer>
         © Marius Ambrazevičius IFF-2/4 KTU IF <?php echo date("Y") . " m." ?>

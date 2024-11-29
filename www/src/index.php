@@ -24,7 +24,14 @@
 </head>
 
 <body>
-    <h1>Visos prekės</h1>
+    <h1>
+        Visos prekės
+        <?php
+        if (isset($_GET["cart"])) {
+            echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai idėta į krepšelį.</p>";
+        }
+        ?>
+    </h1>
     <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
     style="text-decoration:none; right:40px;" class="smaller-img-top-right"></a>
     <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php"
@@ -34,6 +41,10 @@
         $user = User::find($_SESSION['user_id']);
         echo "<p class='text-top-right'>{$user->email}</p>";
         echo "<a href='src/actions/logout.php' class='logout-btn-top-right'>Atsijungti</a>";
+    }
+    if (isset($_SESSION["cart"])) {
+        $total_amount = count($_SESSION["cart"]);
+        echo "<a class='logout-btn-top-right' style='right:43px; width:10px; padding:10px;'>{$total_amount}</a>";
     }
     $products = Product::all();
     echo "<div class = 'items'>";
@@ -49,8 +60,14 @@
         echo "<p class = 'item-text-general'>{$product->model} </p>";
         echo Product::image_str($product->id);
         echo $price_text;
-        echo "<a href='src/actions/to-cart.php?prod={$product->id}' class='item-btn'>Į krepšelį</a>";
-        echo "</div>";
+        echo "<form action='src/actions/to-cart.php' method='post'>";
+        echo "<label for='quantity-{$product->id}' class='item-label'>Kiekis:</label>";
+        echo "<input type='number' id='quantity-{$product->id}' name='quantity' value='1' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important;'>";
+        echo "<input type='hidden' name='prod_id' value='{$product->id}'>"; // Pass the product ID
+        echo "<input type='submit' class='form-submit-smaller' style='margin-left:0rem; !important; width:10rem;' value='Į krepšelį'>";
+        echo "</form>";
+    
+    echo "</div>";
     }
     echo "</div>";
     ?>
