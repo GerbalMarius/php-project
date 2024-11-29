@@ -1,9 +1,10 @@
 <?php
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Schema\Blueprint;
 Capsule::schema()->dropIfExists("users");
 
-Capsule::schema()->create("users", function ( $table) {
-    $table->increments("id");
+Capsule::schema()->create("users", function (Blueprint $table) {
+    $table->id();
     $table->string("name",80);
     $table->string("last_name",80);
     $table->string("email",80)->unique();

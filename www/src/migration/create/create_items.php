@@ -1,9 +1,10 @@
 <?php
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Schema\Blueprint;
 Capsule::schema()->dropIfExists("items");
 
-Capsule::schema()->create("items", function ( $table) {
-    $table->increments("id");
+Capsule::schema()->create("items", function ( Blueprint $table) {
+    $table->id();
     $table->string("title", 80);
     $table->string("manufacturer",80);
     $table->string("model",80);
