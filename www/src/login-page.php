@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "utils.php";
-$url = "/www/src";
+$url = "/www/src/account-page.php";
 
 if (isset($_SESSION['user_id']) && is_active_user($_SESSION['user_id'])) {
     header("Location: $url");

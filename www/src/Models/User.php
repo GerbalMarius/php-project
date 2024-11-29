@@ -10,6 +10,11 @@ class User extends Model
 
     protected $fillable = ["name", "last_name", "email", "password", "birthdate", "telephone_number", "is_active"];
 
+
+    public function wallet(){
+        return $this->hasOne(Wallet::class);
+    }
+
     public function roles(){
         return $this->belongsToMany(Role::class, "user_roles");
     }

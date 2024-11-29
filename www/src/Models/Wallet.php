@@ -7,7 +7,11 @@ class Wallet extends Model {
 
     public $timestamps = false;
     
-    protected $fillable = ["amount"];
+    protected $fillable = ["balance"];
     protected $table = "wallets";
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
 ?>

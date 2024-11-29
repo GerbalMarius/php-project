@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
+Capsule::schema()->disableForeignKeyConstraints();
 Capsule::schema()->dropIfExists("users");
 
 Capsule::schema()->create("users", function (Blueprint $table) {
@@ -13,4 +14,5 @@ Capsule::schema()->create("users", function (Blueprint $table) {
     $table->string("telephone_number");
     $table->boolean("is_active")->default(true);
 });
+Capsule::schema()->enableForeignKeyConstraints();
 ?>

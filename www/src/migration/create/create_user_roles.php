@@ -3,6 +3,7 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
 
+Capsule::schema()->disableForeignKeyConstraints();
 Capsule::schema()->dropIfExists("user_roles");
 
 Capsule::schema()->create("user_roles", function (Blueprint $table) {
@@ -16,4 +17,5 @@ Capsule::schema()->create("user_roles", function (Blueprint $table) {
     // Composite primary key
     $table->primary(["user_id", "role_id"]);
 });
+Capsule::schema()->enableForeignKeyConstraints();
 ?>
