@@ -93,6 +93,9 @@ tbody tr {
 .error{
     color: #cc0404;
 }
+.success{
+    color: rgba(1, 138, 1, 0.795);
+}
 .red-btn-table{
     color: white;
     background-color: #cc0404;

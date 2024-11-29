@@ -35,5 +35,16 @@ $user = User::find($_SESSION["user_id"]);
     <h2 class="form-heading">El. paštas: <?php echo "{$user->email}"; ?></h2>
     <h2 class="form-heading">Telefono numeris: <?php echo "{$user->telephone_number}"; ?></h2>
     <h2 class="form-heading">Gimimo data: <?php echo "{$user->birthdate}"; ?></h2>
+    <h2 class="form-heading">Piniginės likutis: <?php echo "{$user->wallet->balance}€"; ?> 
+    <form action="actions/add_funds.php" method="post">
+    <input name="funds" class="form-input-smaller" placeholder="Papildyti piniginę." type="number" min="0" max="1000">
+    <input class="form-submit-smaller" type="submit" value="Patvirtinti">
+    </form>
+    <?php 
+    if (isset($_GET["success"])) {
+        echo "<p class = 'success'>Piniginė sėkmingai papildyta</p>";
+    }
+    ?>
+    </h2>
 </body>
 </html>

@@ -74,6 +74,9 @@ if (count($errs) > 0) {
     );
     $selected_role = Role::find($_POST["user_role"]);
     $user->roles()->attach($selected_role->id);
+    $user->wallet()->create([
+        "balance"=> 50,
+    ]);
     session_unset();
     $_SESSION["user_id"] = $user->id;
     header("Location: $url");
