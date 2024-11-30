@@ -50,6 +50,54 @@
         echo "<a class='logout-btn-top-right' style='right:43px; width:10px; padding:10px;'>{$total_amount}</a>";
     }
     $products = Product::all();
+    $manufacturers = $products->map(function ($product) { return $product->manufacturer;})->unique();
+    $titles = $products->map(function ($product) {return $product->title;})->unique();
+    $models = $products->map(function ($product) {return $product->model;})->unique();
+    $categories = $products->map(function ($product) {return $product->category;})->unique();
+    $price_max  = $products->filter(function ($product) {return $product->discount >= 1;})
+    ->map(function ($product) {return calculate_discount($product->unit_price, $product->discount);})->max();
+    echo "<div class = 'shop wrapper'>";
+    echo "<div class = 'filter-container'>";
+    echo "      <form method = 'post'>
+                  <h2 class = 'form-heading' style='margin-left:0px;'>Filtravimas</h2>";
+    echo                "<p></p>";
+    echo                 "<label class = 'form-label' style='margin-left:0px;'>Gamintojas</label>";
+    echo                "<p></p>";
+    foreach ($manufacturers as $manufacturer) {
+    echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$manufacturer} id={$manufacturer} value={$manufacturer}>";
+    echo "<label for={$manufacturer} class='form-label' style='margin-left:0px;'>{$manufacturer}</label>";
+    echo "<p></p>";
+    }
+    echo                 "<label class = 'form-label' style='margin-left:0px;'>Pavadinimas</label>";
+    echo                "<p></p>";
+    foreach ($titles as $title) {
+        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$title} id={$title} value={$title}>";
+        echo "<label for={$title} class='form-label' style='margin-left:0px;'>{$title}</label>";
+        echo "<p></p>";
+        }
+    echo                 "<label class = 'form-label' style='margin-left:0px;'>Modelis</label>";
+    echo                "<p></p>";
+    foreach ($models as $model) {
+        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$model} id={$model} value={$model}>";
+        echo "<label for={$model} class='form-label' style='margin-left:0px;'>{$model}</label>";
+        echo "<p></p>";
+        }
+    echo                 "<label class = 'form-label' style='margin-left:0px;'>Paskirtis/Kategorija</label>";
+    echo                "<p></p>";
+    foreach ($categories as $category) {
+        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$category} id={$category} value={$category}>";
+        echo "<label for={$category} class='form-label' style='margin-left:0px;'>{$category}</label>";
+        echo "<p></p>";
+        }
+        echo                 "<label class = 'form-label' style='margin-left:0px;'>Kaina</label>";
+        echo                "<p></p>";
+        echo             "<input type='range' min=1' max='{$price_max}' value='0' class='slider' id='slider' step='0.1' name='filter_price'>";
+        echo                "<p></p>";
+        echo             "<p id='slider-value'>0</p>";
+        echo                "<p></p>";
+    echo            "<input type='submit' class='form-submit-smaller' style='margin-left:0rem; !important; width:10rem;' value='Filtruoti'>";
+    echo         "</form>";
+    echo  "</div>";
     echo "<div class = 'items'>";
     foreach ($products as $product) {
         $price_text = "<p class = 'item-text-price'>" . calculate_discount($product->unit_price, $product->discount) . "€/vnt</p>";
@@ -73,7 +121,17 @@
     echo "</div>";
     }
     echo "</div>";
+    echo "</div>"
     ?>
+    <script>
+    // Get the slider and the span element
+        const slider = document.getElementById("slider");
+        const sliderValue = document.getElementById("slider-value");
+        // Update the span element with the current value of the slider
+        slider.addEventListener("input", function () {
+            sliderValue.textContent = slider.value; // Display the slider's value
+            });
+    </script>
     <footer>
         © Marius Ambrazevičius IFF-2/4 KTU IF <?php echo date("Y") . " m." ?>
     </footer>

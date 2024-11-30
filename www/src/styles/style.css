@@ -120,10 +120,29 @@ tbody tr {
     padding: 10px;
     border-radius: 15px;
 }
+.shop-wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start; /* Align items from the start */
+    align-items: flex-start; /* Align the top edges of the containers */
+    gap: 20px; /* Space between filter and items */
+    max-width: 100%;
+}
+.filter-container {
+    width: 200px;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    left: -400px;
+}
+
 .items {
     margin: 0 auto;
     position: relative;
     display: grid;
+    top:-280px;
     justify-content: space-between;
     grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
     gap: 20px;
@@ -208,5 +227,109 @@ tbody tr {
     right: 150px;
 }
 .logout-btn:hover{
+    cursor: pointer;
+}
+
+/* General slider styling */
+input[type="range"] {
+    -webkit-appearance: none; 
+    appearance: none;         
+    width: 150px;             
+    height: 5px;             
+    background: lightgray;    
+    border-radius: 5px;       
+    outline: none;            
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default thumb styles */
+    appearance: none;
+    width: 20px;              /* Thumb width */
+    height: 20px;             
+    background: black;        
+    border-radius: 50%;       
+    cursor: pointer;          
+}
+
+/* Style for the slider thumb in Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: black;
+    border: none;             /* Remove any default border */
+    border-radius: 50%;       /* Makes it circular */
+    cursor: pointer;
+}
+
+/* Style for Internet Explorer/Edge (older versions) */
+input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: black;
+    border: none;
+    border-radius: 50%;       /* Makes it circular */
+    cursor: pointer;
+}
+
+/* Style the slider track */
+.slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: black; /* Track color */
+    border-radius: 5px;
+    border: none;
+}
+
+/* Style the slider thumb (the handle) */
+.slider::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: black; /* Thumb color */
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+/* Firefox */
+.slider::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: black; /* Thumb color */
+    cursor: pointer;
+}
+
+/* Firefox track */
+.slider::-moz-range-track {
+    background: black; /* Track color */
+    height: 8px;
+    border-radius: 5px;
+}
+
+/* Internet Explorer and Edge */
+.slider::-ms-track {
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+.slider::-ms-fill-lower {
+    background: black; /* Lower track color */
+}
+
+.slider::-ms-fill-upper {
+    background: black; /* Upper track color */
+}
+
+.slider::-ms-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: black; /* Thumb color */
     cursor: pointer;
 }
