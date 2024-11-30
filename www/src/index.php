@@ -4,12 +4,7 @@
  require __DIR__ . "/config.php";
  require __DIR__ . '/../vendor/autoload.php';
  require __DIR__ . '/utils.php';
-
  session_start();
-
-/*
-PLEASE DONT JUDGE ME FOR THIS SHITTY HACK, USERS WONT SEE IT ANYWAY
-*/
 // Fetch all products
 $products = Product::all();
 
@@ -31,8 +26,6 @@ $filteredProducts = $products->filter(function ($product) use (
     $selectedPrice
 ) {
 
-    
-    // Check if product matches all search words
     if (!empty($searchWords)) {
         $matchesAllWords = true;
         foreach ($searchWords as $word) {
@@ -42,7 +35,6 @@ $filteredProducts = $products->filter(function ($product) use (
                 $product->model,
                 $product->category
             ];
-
             $matchesWord = false;
             foreach ($fieldsToSearch as $field) {
                 if (stripos($field, $word) !== false) {
@@ -50,7 +42,6 @@ $filteredProducts = $products->filter(function ($product) use (
                     break;
                 }
             }
-
             if (!$matchesWord) {
                 $matchesAllWords = false;
                 break;
@@ -83,8 +74,6 @@ $filteredProducts = $products->filter(function ($product) use (
     }
     return true;
 });
-
-
 ?>
 <!DOCTYPE html>
 <html lang="lt-LT">
