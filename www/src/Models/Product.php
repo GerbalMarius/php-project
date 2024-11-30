@@ -27,4 +27,9 @@ class Product extends Model {
             return "Error decompressing image.";
         }
     }
+
+    public function carts(){
+        return $this->belongsToMany(Cart::class, "cart_products")
+                                    ->withPivot("quantity", "price");
+    }
 }

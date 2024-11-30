@@ -10,11 +10,11 @@ Capsule::schema()->dropIfExists("order_status");
 
 Capsule::schema()->create("order_status", function (Blueprint $table) {
     $table->id();
-    $table->string("status_name")->unique();
+    $table->string("name",40);
 
 });
-OrderStatus::create(["status_name"=> "PLACED"]);
-OrderStatus::create(["status_name"=> "RESERVED"]);
-OrderStatus::create(["status_name"=> "APPROVED",]);
-OrderStatus::create(["order_status"=> "CANCELED",]);
+OrderStatus::create(["name"=> "PLACED"]);
+OrderStatus::create(["name"=> "RESERVED"]);
+OrderStatus::create(["name"=> "APPROVED",]);
+OrderStatus::create(["name"=> "CANCELED",]);
 ?>

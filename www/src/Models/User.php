@@ -18,5 +18,9 @@ class User extends Model
     public function roles(){
         return $this->belongsToMany(Role::class, "user_roles");
     }
+
+    public function carts(){
+        return $this->hasMany(Cart::class);
+    }
 }
 ?>
