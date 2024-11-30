@@ -6,6 +6,51 @@
  require __DIR__ . '/utils.php';
 
  session_start();
+
+
+// Fetch all products
+$products = Product::all();
+
+// Initialize filters
+$selectedManufacturers = $_POST['manufacturer'] ?? [];
+$selectedTitles = $_POST['title'] ?? [];
+$selectedModels = $_POST['model'] ?? [];
+$selectedCategories = $_POST['category'] ?? [];
+$selectedPrice = isset($_POST['filter_price']) ? floatval($_POST['filter_price']) : null;
+
+// Apply filters
+$filteredProducts = $products->filter(function ($product) use (
+    $selectedManufacturers,
+    $selectedTitles,
+    $selectedModels,
+    $selectedCategories,
+    $selectedPrice
+) {
+    // Filter by manufacturer
+    if (!empty($selectedManufacturers) && !in_array($product->manufacturer, $selectedManufacturers)) {
+        return false;
+    }
+    // Filter by title
+    if (!empty($selectedTitles) && !in_array($product->title, $selectedTitles)) {
+        return false;
+    }
+    // Filter by model
+    if (!empty($selectedModels) && !in_array($product->model, $selectedModels)) {
+        return false;
+    }
+    // Filter by category
+    if (!empty($selectedCategories) && !in_array($product->category, $selectedCategories)) {
+        return false;
+    }
+    // Filter by price
+    $discountedPrice = calculate_discount($product->unit_price, $product->discount);
+    if ($selectedPrice !== null && $discountedPrice < $selectedPrice) {
+        return false;
+    }
+    return true;
+});
+
+
 ?>
 <!DOCTYPE html>
 <html lang="lt-LT">
@@ -49,7 +94,6 @@
         $total_amount = count($_SESSION["cart"]);
         echo "<a class='logout-btn-top-right' style='right:43px; width:10px; padding:10px;'>{$total_amount}</a>";
     }
-    $products = Product::all();
     $manufacturers = $products->map(function ($product) { return $product->manufacturer;})->unique();
     $titles = $products->map(function ($product) {return $product->title;})->unique();
     $models = $products->map(function ($product) {return $product->model;})->unique();
@@ -64,34 +108,39 @@
     echo                 "<label class = 'form-label' style='margin-left:0px;'>Gamintojas</label>";
     echo                "<p></p>";
     foreach ($manufacturers as $manufacturer) {
-    echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$manufacturer} id={$manufacturer} value={$manufacturer}>";
+        $alreadyClicked = in_array($manufacturer, $selectedManufacturers) ? "checked" : "";
+    echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name= 'manufacturer[]' value={$manufacturer} $alreadyClicked>";
     echo "<label for={$manufacturer} class='form-label' style='margin-left:0px;'>{$manufacturer}</label>";
     echo "<p></p>";
     }
     echo                 "<label class = 'form-label' style='margin-left:0px;'>Pavadinimas</label>";
     echo                "<p></p>";
     foreach ($titles as $title) {
-        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$title} id={$title} value={$title}>";
+        $alreadyClicked = in_array($title, $selectedTitles) ? "checked" : "";
+        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ='title[]' value={$title} $alreadyClicked>";
         echo "<label for={$title} class='form-label' style='margin-left:0px;'>{$title}</label>";
         echo "<p></p>";
         }
     echo                 "<label class = 'form-label' style='margin-left:0px;'>Modelis</label>";
     echo                "<p></p>";
     foreach ($models as $model) {
-        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$model} id={$model} value={$model}>";
+        $alreadyClicked = in_array($model, $selectedModels) ? "checked" : "";
+        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ='model[]' value={$model} $alreadyClicked>";
         echo "<label for={$model} class='form-label' style='margin-left:0px;'>{$model}</label>";
         echo "<p></p>";
         }
     echo                 "<label class = 'form-label' style='margin-left:0px;'>Paskirtis/Kategorija</label>";
     echo                "<p></p>";
     foreach ($categories as $category) {
-        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ={$category} id={$category} value={$category}>";
+        $alreadyClicked = in_array($category, $selectedCategories) ? "checked" : "";
+        echo "<input type = 'checkbox' class = 'form-input-smaller' style='margin-left:0px; width:1rem;' name ='category[]' value={$category} $alreadyClicked>";
         echo "<label for={$category} class='form-label' style='margin-left:0px;'>{$category}</label>";
         echo "<p></p>";
         }
         echo                 "<label class = 'form-label' style='margin-left:0px;'>Kaina</label>";
         echo                "<p></p>";
-        echo             "<input type='range' min=1' max='{$price_max}' value='0' class='slider' id='slider' step='0.1' name='filter_price'>";
+        $priceValue = $selectedPrice ?? 0;
+        echo             "<input type='range' min=1' max='{$price_max}' value='{$priceValue}' class='slider' id='slider' step='0.1' name='filter_price'>";
         echo                "<p></p>";
         echo             "<p id='slider-value'>0</p>";
         echo                "<p></p>";
@@ -99,7 +148,7 @@
     echo         "</form>";
     echo  "</div>";
     echo "<div class = 'items'>";
-    foreach ($products as $product) {
+    foreach ($filteredProducts as $product) {
         $price_text = "<p class = 'item-text-price'>" . calculate_discount($product->unit_price, $product->discount) . "€/vnt</p>";
         if ($product->discount >= 1) {
             $price_text .= "<p class='item-text-discount'>" . round($product->discount, 1) . "% Nuolaida</p>";
