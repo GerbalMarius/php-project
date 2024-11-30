@@ -18,8 +18,12 @@ class Product extends Model {
             // Decode Base64 string back to image data
             $imageData = base64_decode($deComp);
             if ($imageData !== false) {
-                // Output the image using a data URL
-                return '<img src="data:image/jpeg;base64,' . base64_encode($imageData) . '" alt="' . htmlspecialchars($product->title) . '" style="width:200px;height:200px;">';
+                if ($product->total_units <= 0) {
+                    return '<img src="data:image/jpeg;base64,' . base64_encode($imageData) . '" alt="' . htmlspecialchars($product->title) . '" style="width:200px;height:200px; filter:grayscale(100%);">';
+                }else{
+                    return '<img src="data:image/jpeg;base64,' . base64_encode($imageData) . '" alt="' . htmlspecialchars($product->title) . '" style="width:200px;height:200px;">';
+                }
+                
             } else {
                 return "Error decoding image.";
             }

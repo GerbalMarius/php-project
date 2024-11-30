@@ -179,11 +179,19 @@ $filteredProducts = $products->filter(function ($product) use (
     echo  "</div>";
     echo "<div class = 'items'>";
     foreach ($filteredProducts as $product) {
+        $isSoldOut = $product->total_units <= 0;
+        $disable = $isSoldOut ? 'disabled' : '';
+        $cursorStyle = $isSoldOut ? 'cursor:default;' : '';
+        $text = $isSoldOut ? 'Išparduota' : 'Į krepšelį';
         $price_text = "<p class = 'item-text-price'>" . calculate_discount($product->unit_price, $product->discount) . "€/vnt</p>";
         if ($product->discount >= 1) {
             $price_text .= "<p class='item-text-discount'>" . round($product->discount, 1) . "% Nuolaida</p>";
         }
-        echo "<div class = 'item'>";
+        if ($isSoldOut) {
+            echo "<div class = 'item' style='opacity:0.6'>";
+        } else{
+            echo "<div class = 'item'>";
+        }
         echo "<p class ='item-title'>{$product->title}</p>";
         echo "<p class = 'item-text-general'>{$product->manufacturer}</p>";
         echo "<p class = 'item-text-general'>{$product->category} </p>";
@@ -192,9 +200,9 @@ $filteredProducts = $products->filter(function ($product) use (
         echo $price_text;
         echo "<form action='src/actions/to-cart.php' method='post'>";
         echo "<label for='quantity-{$product->id}' class='item-label'>Kiekis:</label>";
-        echo "<input type='number' id='quantity-{$product->id}' name='quantity' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important;'>";
-        echo "<input type='hidden' name='prod_id' value='{$product->id}'>"; // Pass the product ID
-        echo "<input type='submit' class='form-submit-smaller' style='margin-left:0rem; !important; width:10rem;' value='Į krepšelį'>";
+        echo "<input type='number' id='quantity-{$product->id}' name='quantity' value='0' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important; $cursorStyle' $disable>";
+        echo "<input type='hidden' name='prod_id' value='{$product->id}' {$disable}>"; // Pass the product ID
+        echo "<input type='submit' class='form-submit-smaller' style='margin-left:0rem; !important; width:10rem; $cursorStyle' value='$text' $disable>";
         echo "</form>";
     
     echo "</div>";

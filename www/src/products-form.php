@@ -39,7 +39,7 @@ session_start();
             <input class="form-input" type="number" name="product_unit_price" step="0.1" min="1.00" max="999.999">
             <p></p>
             <label for="product_count" class="form-label">Kiekis</label>
-            <input class="form-input" type="number" name="product_count" min="1" max="100">
+            <input class="form-input" type="number" name="product_count" min="0" max="100">
             <p></p>
             <label class="form-label" for="product_discount">Nuolaida %</label>
             <input class="form-input" type="number" name="product_discount" step="0.1" min="0.0" max="99.99">
