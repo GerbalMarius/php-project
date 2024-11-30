@@ -26,7 +26,14 @@ require __DIR__ . '/utils.php';
 <body>
     <img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"><a class="smaller-img-top-left"
         href="../src"></a>
-    <h1 style="margin-top:40px;">Krepšelis</h1>
+    <h1 style="margin-top:40px;">
+        Krepšelis
+        <?php
+        if (isset($_GET["success"])) {
+            echo "<p class='success' style='font-size: 20px;'>Užsakymas sėkmingai pateiktas</p>";
+        }
+        ?>
+    </h1>
     <div class="wrapper">
     <table>
         <tbody>

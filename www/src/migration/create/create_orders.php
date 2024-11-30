@@ -14,6 +14,7 @@ Capsule::schema()->create("orders", function (Blueprint $table) {
     $table->integer("amount");
     $table->decimal("total_price",10,2)->default(0);
     $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+    $table->foreignId("cart_id")->constrained()->cascadeOnDelete();
 });
 
 Capsule::schema()->enableForeignKeyConstraints();

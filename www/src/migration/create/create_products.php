@@ -1,9 +1,11 @@
 <?php
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Schema\Blueprint;
-Capsule::schema()->dropIfExists("items");
 
-Capsule::schema()->create("items", function ( Blueprint $table) {
+Capsule::schema()->disableForeignKeyConstraints();
+Capsule::schema()->dropIfExists("products");
+
+Capsule::schema()->create("products", function ( Blueprint $table) {
     $table->id();
     $table->string("title", 80);
     $table->string("manufacturer",80);
@@ -14,5 +16,6 @@ Capsule::schema()->create("items", function ( Blueprint $table) {
     $table->decimal("discount",5,2);
     $table->integer("total_units");
 });
+Capsule::schema()->enableForeignKeyConstraints();
 
 ?>
