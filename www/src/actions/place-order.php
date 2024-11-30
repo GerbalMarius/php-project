@@ -42,7 +42,7 @@ if (!empty($_SESSION["cart"])) {
     $cart->full_price = $totalPrice;
     $cart->save();
 
-    $user->carts()->attach($cart->id);
+    $user->carts()->save($cart);
 
     Order::create(
         [
