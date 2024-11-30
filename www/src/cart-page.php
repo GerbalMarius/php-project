@@ -67,7 +67,7 @@ require __DIR__ . '/utils.php';
     <a href='actions/clear-cart.php' class ='red-btn-table'>Valyti krepšelį</a>
     <?php
     if(!empty($_SESSION["cart"]) && !empty($_SESSION["user_id"]) && is_active_user( $_SESSION["user_id"])) {
-            echo "<a href='' class='green-btn-table'>Pateikti užsakymą</a>";
+            echo "<a href='actions/place-order.php' class='green-btn-table'>Pateikti užsakymą</a>";
     }
     ?>    
     </div>

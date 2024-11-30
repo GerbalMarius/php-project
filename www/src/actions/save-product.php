@@ -39,3 +39,5 @@ Product::create(
         'total_units'=> test_input($product_quantity),
     ]
 );
+header("Location: /www/src?produce=true");
+exit;

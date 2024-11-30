@@ -17,6 +17,7 @@ if (empty($_POST["prod_id"])){
 
 $product = Product::find($_POST["prod_id"]);
 
+
 $_SESSION["cart"][] = [
     "id" => $product->id,
     "title" => $product->title,

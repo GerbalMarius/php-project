@@ -30,6 +30,9 @@
         if (isset($_GET["cart"])) {
             echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai idėta į krepšelį.</p>";
         }
+        if (isset($_GET["produce"])) {
+            echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai įtraukta į katalogą.</p>";
+        }
         ?>
     </h1>
     <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
