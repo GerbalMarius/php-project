@@ -7,26 +7,60 @@
 
  session_start();
 
-
+/*
+PLEASE DONT JUDGE ME FOR THIS SHITTY HACK, USERS WONT SEE IT ANYWAY
+*/
 // Fetch all products
 $products = Product::all();
 
 // Initialize filters
+$searchQuery = isset($_POST['search']) ? test_input($_POST['search']) : '';
 $selectedManufacturers = $_POST['manufacturer'] ?? [];
 $selectedTitles = $_POST['title'] ?? [];
 $selectedModels = $_POST['model'] ?? [];
 $selectedCategories = $_POST['category'] ?? [];
 $selectedPrice = isset($_POST['filter_price']) ? floatval($_POST['filter_price']) : null;
-
+$searchWords = array_filter(explode(' ', $searchQuery)); // Remove any empty words
 // Apply filters
 $filteredProducts = $products->filter(function ($product) use (
     $selectedManufacturers,
     $selectedTitles,
     $selectedModels,
     $selectedCategories,
+    $searchWords,
     $selectedPrice
 ) {
-    // Filter by manufacturer
+
+    
+    // Check if product matches all search words
+    if (!empty($searchWords)) {
+        $matchesAllWords = true;
+        foreach ($searchWords as $word) {
+            $fieldsToSearch = [
+                $product->title,
+                $product->manufacturer,
+                $product->model,
+                $product->category
+            ];
+
+            $matchesWord = false;
+            foreach ($fieldsToSearch as $field) {
+                if (stripos($field, $word) !== false) {
+                    $matchesWord = true;
+                    break;
+                }
+            }
+
+            if (!$matchesWord) {
+                $matchesAllWords = false;
+                break;
+            }
+        }
+        if (!$matchesAllWords) {
+            return false; // If any word doesn't match, exclude this product
+        }
+    }
+
     if (!empty($selectedManufacturers) && !in_array($product->manufacturer, $selectedManufacturers)) {
         return false;
     }
@@ -79,6 +113,13 @@ $filteredProducts = $products->filter(function ($product) use (
             echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai įtraukta į katalogą.</p>";
         }
         ?>
+        <form action="" method="post">
+        <input type="text" class="form-input" name="search" placeholder="Įveskite paieškos terminą." style="margin:0 auto; margin-left:40rem; position:relative; top:-15px;width:25rem;">
+        <button class="form-submit-smaller" style="width:60px !important; padding: 10px; position:relative; border-radius:20px; left:0px; top:-6px;">
+            <img src="src/images/search.svg" alt="search" class="search-thumb">
+        </button>
+        </form>
+        
     </h1>
     <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
     style="text-decoration:none; right:40px;" class="smaller-img-top-right"></a>
@@ -142,7 +183,7 @@ $filteredProducts = $products->filter(function ($product) use (
         $priceValue = $selectedPrice ?? 0;
         echo             "<input type='range' min=1' max='{$price_max}' value='{$priceValue}' class='slider' id='slider' step='0.1' name='filter_price'>";
         echo                "<p></p>";
-        echo             "<p id='slider-value'>0</p>";
+        echo             "<p id='slider-value'>$priceValue</p>";
         echo                "<p></p>";
     echo            "<input type='submit' class='form-submit-smaller' style='margin-left:0rem; !important; width:10rem;' value='Filtruoti'>";
     echo         "</form>";
@@ -162,7 +203,7 @@ $filteredProducts = $products->filter(function ($product) use (
         echo $price_text;
         echo "<form action='src/actions/to-cart.php' method='post'>";
         echo "<label for='quantity-{$product->id}' class='item-label'>Kiekis:</label>";
-        echo "<input type='number' id='quantity-{$product->id}' name='quantity' value='1' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important;'>";
+        echo "<input type='number' id='quantity-{$product->id}' name='quantity' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important;'>";
         echo "<input type='hidden' name='prod_id' value='{$product->id}'>"; // Pass the product ID
         echo "<input type='submit' class='form-submit-smaller' style='margin-left:0rem; !important; width:10rem;' value='Į krepšelį'>";
         echo "</form>";

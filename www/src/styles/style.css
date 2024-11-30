@@ -333,3 +333,10 @@ input[type="range"]::-ms-thumb {
     background: black; /* Thumb color */
     cursor: pointer;
 }
+
+.search-thumb{
+    color: white;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
