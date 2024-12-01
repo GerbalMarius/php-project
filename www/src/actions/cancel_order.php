@@ -10,7 +10,17 @@ use Models\Order;
 
 session_start();
 $order = Order::find($_GET['order']);
-$relatedCart = $order->cart;
+$url = "/www/src/orders-page.php";
+$relatedCart = Cart::find($order->cart_id);
+$products = $relatedCart->products;
 
+foreach ($products as $product) {
+    $orderedQuanity = $product->pivot->quantity;
+    $product->total_units = $orderedQuanity + $product->total_units;
+    $product->save();
+}
+$order->order_status_id = Order::$CANCELED;
+$order->save();
+header("Location: $url?canceled=true");
 ?>
-<h1><?php echo var_dump($cart->id)?></h1>
+<h1><?php ?></h1>

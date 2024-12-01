@@ -30,6 +30,9 @@ $placedOrders = $orders->filter(fn($order) => $order->order_status_id === Order:
     if (isset($_GET['approved'])) {
         echo "<p class ='success' style='font-size: 20px;'>Užsakymas patvirtintas.</p>";
     }
+    if (isset($_GET['canceled'])) {
+        echo "<p class ='success' style='font-size: 20px;'>Užsakymas atšauktas.</p>";
+    }
     ?>
     <div class="wrapper">
     <table style="position: relative; left:100px;">

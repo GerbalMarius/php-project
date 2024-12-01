@@ -21,6 +21,10 @@ function is_active_user($user_id): bool {
 }
 function has_role($user_id,$role): bool {
     $actual_user = User::find($user_id);
+    if (empty($actual_user) || empty($actual_user->roles)) {
+        return false;
+    }
+
     return $actual_user->roles->contains("name", $role);
 }
 ?>
