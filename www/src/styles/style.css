@@ -142,11 +142,12 @@ tbody tr {
     margin: 0 auto;
     position: relative;
     display: grid;
-    top:-280px;
+    top:80px;
     justify-content: space-between;
     grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
     gap: 20px;
     width: 30rem;
+    left: -180px;
     max-width: 100%; 
 }
 

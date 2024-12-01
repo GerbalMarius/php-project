@@ -24,30 +24,65 @@ session_start();
 
         <form action="actions/save-product.php" method="post" enctype="multipart/form-data">
             <label for="product_name" class="form-label">Prekės pavadinimas</label>
-            <input class="form-input" type="text" name="product_name" maxlength="80">
+            <input class="form-input" type="text" name="product_name" maxlength="80" value="<?php echo htmlspecialchars($_SESSION['product_name'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_name"])) {
+                echo "<span class = 'error'>*Pavadinimas būtinas.</span>";
+            }
+            ?>
             <p></p>
             <label for="product_manufacturer" class="form-label">Prekės gamintojas</label>
-            <input class="form-input" type="text" name="product_manufacturer" maxlength="80">
+            <input class="form-input" type="text" name="product_manufacturer" maxlength="80" value="<?php echo htmlspecialchars($_SESSION['product_manufacturer'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_manufacturer"])) {
+                echo "<span class = 'error'>*Gamintojas būtinas.</span>";
+            }
+            ?>
             <p></p>
             <label for="product_model" class="form-label">Modelis</label>
-            <input class="form-input" type="text" name="product_model" maxlength="80">
+            <input class="form-input" type="text" name="product_model" maxlength="80" value="<?php echo htmlspecialchars($_SESSION['product_model'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_model"])) {
+                echo "<span class = 'error'>*Modelis būtinas.</span>";
+            }
+            ?>
             <p></p>
             <label for="product_category" class="form-label">Kategorija/paskirtis</label>
-            <input class="form-input" type="text" name="product_category" maxlength="80">
+            <input class="form-input" type="text" name="product_category" maxlength="80" value="<?php echo htmlspecialchars($_SESSION['product_category'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_category"])) {
+                echo "<span class = 'error'>*Kategorija būtina.</span>";
+            }
+            ?>
             <p></p>
             <label for="product_unit_price" class="form-label">Vieneto kaina €</label>
-            <input class="form-input" type="number" name="product_unit_price" step="0.1" min="1.00" max="999.999">
+            <input class="form-input" type="number" name="product_unit_price" step="0.1" min="1.00" max="999.999" value="<?php echo htmlspecialchars($_SESSION['product_unit_price'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_unit_price"])) {
+                echo "<span class = 'error'>*Kaina būtina.</span>";
+            }
+            ?>
             <p></p>
             <label for="product_count" class="form-label">Kiekis</label>
-            <input class="form-input" type="number" name="product_count" min="0" max="100">
+            <input class="form-input" type="number" name="product_count" min="0" max="100" value="<?php echo htmlspecialchars($_SESSION['product_count'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_count"])) {
+                echo "<span class = 'error'>*Kiekis būtinas.</span>";
+            }
+            ?>
             <p></p>
             <label class="form-label" for="product_discount">Nuolaida %</label>
-            <input class="form-input" type="number" name="product_discount" step="0.1" min="0.0" max="99.99">
+            <input class="form-input" type="number" name="product_discount" step="0.1" min="0.0" max="99.99" value="<?php echo htmlspecialchars($_SESSION['product_discount'] ?? "") ?>">
+            <?php
+            if(isset($_GET["product_discount"])) {
+                echo "<span class = 'error'>*Nuolaidos laukas tuščias.</span>";
+            }
+            ?>
             <p></p>
             <label class="form-label">Paveiksliukas</label>
             <p></p>
             <label class="form-upload" for="product_pict"><img src="images/upload-icon.svg" style="width: 60px; height:60px;"></label><span id="img-text"></span>
-            <input class="form-input" type="file" name="product_pict" style="display:none" id="product_pict"  accept="image/jpeg">
+            <input class="form-input" type="file" name="product_pict" style="display:none" id="product_pict"  accept="image/jpeg" required>
             <p></p>
             <input type="submit" class="form-submit" value="Išsaugoti prekę" >
         </form>

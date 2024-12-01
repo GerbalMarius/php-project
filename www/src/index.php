@@ -93,7 +93,7 @@ $filteredProducts = $products->filter(function ($product) use (
 
 <body>
     <h1>
-        Visos prekės
+        Audio parduotuvė
         <?php
         if (isset($_GET["cart"])) {
             echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai idėta į krepšelį.</p>";
@@ -130,7 +130,7 @@ $filteredProducts = $products->filter(function ($product) use (
     $categories = $products->map(function ($product) {return $product->category;})->unique();
     $price_max  = $products->filter(function ($product) {return $product->discount >= 1;})
     ->map(function ($product) {return calculate_discount($product->unit_price, $product->discount);})->max();
-    echo "<div class = 'shop wrapper'>";
+    echo "<div class = 'shop-wrapper'>";
     echo "<div class = 'filter-container'>";
     echo "      <form method = 'post'>
                   <h2 class = 'form-heading' style='margin-left:0px;'>Filtravimas</h2>";
