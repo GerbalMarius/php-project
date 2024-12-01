@@ -54,6 +54,7 @@ require __DIR__ . '/utils.php';
                     $items = $_SESSION["cart"];
                     $price_sum = "0";
                     foreach($items as $item) {
+                        echo "<tr>";
                         $price_actual = bcmul($item["price"], $item["ordered_amount"],2);
                         $price_sum = bcadd($price_sum, $price_actual ,2);
                         echo "<td>{$item["title"]}</td>";

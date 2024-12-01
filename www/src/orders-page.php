@@ -58,6 +58,7 @@ $placedOrders = $orders->filter(fn($order) =>
                     echo "</tr>";
             }else {
                 foreach ($placedOrders as $order) {
+                    echo "<tr>";
                     $relatedUser = $order->user;
                     echo "<td>{$order->total_price}€</td>";
                     echo "<td>{$order->amount}</td>";
@@ -69,6 +70,7 @@ $placedOrders = $orders->filter(fn($order) =>
                         <a href='actions/approve_order.php?order={$order->id}' class = 'option-btn' style='background-color:green'> Patvirtinti</a> 
                         <a href='actions/cancel_order.php?order={$order->id}' class='option-btn'> Atšaukti</a>
                     </td>";
+                    echo "</tr>";
                 }
                 echo "</tr>";
             }

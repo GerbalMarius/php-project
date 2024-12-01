@@ -44,7 +44,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && empty($user)) {
 } else if (!empty($user) && !empty($_POST['password']) && !password_verify($_POST['password'], $user->password)) {
     $errs['mismatch'] = 'true';
     $_SESSION['input_password'] = $_POST['password'];
-} else if (!empty($user) && !is_active_user($user->id)) {
+} else if (!empty($user) && !is_active_user($user->id) && password_verify($_POST['password'], $user->password)) {
+    unset($errs['mismatch']);
     $errs['disabled'] = 'true';
 }
 else {

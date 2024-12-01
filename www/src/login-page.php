@@ -3,12 +3,16 @@ session_start();
 require "utils.php";
 $url = "/www/src/account-page.php";
 $managerUrl = "/www/src/manager-page.php";
+$adminUrl = "/www/src/admin-page.php";
 
 if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_role($_SESSION["user_id"], "USER")) {
     header("Location: $url");
     exit;
 }else if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_role($_SESSION["user_id"], "MANAGER")) {
     header("Location: $managerUrl");
+    exit;
+}else if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_role($_SESSION["user_id"], "ADMIN")) {
+    header("Location: $adminUrl");
     exit;
 }
 
@@ -32,7 +36,13 @@ if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_
 
 <body>
     <div class="form-box">
-        <h1 class="form-heading">Prisijungkite</h1>
+        <h1 class="form-heading">Prisijungkite
+            <?php
+            if (isset($_GET["disabled"])) {
+                echo "<span class ='error'>*Paskyra išjungta.</span>";
+            }  
+            ?>
+        </h1>
         
          <img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"><a class="smaller-img-top-left" href="../src"></a>
         
@@ -47,7 +57,8 @@ if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_
     
             if (isset($_GET["user"])) {
                 echo "<span class ='error'>*Neteisingas el. paštas.</span>";
-            }  
+            }
+            
             
             ?>
             <p></p>

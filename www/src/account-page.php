@@ -9,7 +9,7 @@ use Models\User;
 
 $url = "/www/src";
 
-if (!isset($_SESSION['user_id']) || !is_active_user($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || !is_active_user($_SESSION['user_id']) || !has_role($_SESSION['user_id'], "USER")) {
     header("Location: $url");
     exit;
 }
