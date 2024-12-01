@@ -101,6 +101,9 @@ $filteredProducts = $products->filter(function ($product) use (
         if (isset($_GET["produce"])) {
             echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai įtraukta į katalogą.</p>";
         }
+        if (isset($_GET["updated"])) {
+            echo "<p class ='success' style='font-size: 20px;'>Prekė sėkmingai rezervuota.</p>";
+        }
         ?>
         <form action="" method="post">
         <input type="text" class="form-input" name="search" placeholder="Įveskite paieškos terminą." style="margin:0 auto; margin-left:40rem; position:relative; top:-15px;width:25rem;">
@@ -205,7 +208,9 @@ $filteredProducts = $products->filter(function ($product) use (
         echo "<p class = 'item-text-general'>{$product->model} </p>";
         echo Product::image_str($product->id);
         echo $price_text;
-        echo "<form action='src/actions/to-cart.php' method='post'>";
+        $text = has_role($_SESSION['user_id'], "MANAGER") ? "Papildyti prekę" : $text;
+        $action = has_role($_SESSION['user_id'], "MANAGER") ? "src/actions/update-product.php" :"src/actions/to-cart.php";
+        echo "<form action='$action' method='post'>";
         echo "<label for='quantity-{$product->id}' class='item-label'>Kiekis:</label>";
         echo "<input type='number' id='quantity-{$product->id}' name='quantity' value='0' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important; $cursorStyle' $disable>";
         echo "<input type='hidden' name='prod_id' value='{$product->id}' {$disable}>"; // Pass the product ID

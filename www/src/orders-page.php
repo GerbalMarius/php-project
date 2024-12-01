@@ -7,7 +7,10 @@ if (empty($_SESSION['user_id']) || !has_role($_SESSION['user_id'], "MANAGER")){
     header("Location: $redUrl");
 }
 $orders = Order::all();
-$placedOrders = $orders->filter(fn($order) => $order->order_status_id === Order::$PLACED);
+$placedOrders = $orders->filter(fn($order) => 
+    $order->order_status_id === Order::$PLACED || 
+    ($order->order_status_id === Order::$RESERVED && strtotime($order->date . ' +1 week') < strtotime(date('Y-m-d')))
+);
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +35,9 @@ $placedOrders = $orders->filter(fn($order) => $order->order_status_id === Order:
     }
     if (isset($_GET['canceled'])) {
         echo "<p class ='success' style='font-size: 20px;'>Užsakymas atšauktas.</p>";
+    }
+    if (isset($_GET['reserved'])) {
+        echo "<p class ='success' style='font-size: 20px;'>Užsakymas rezervuotas.</p>";
     }
     ?>
     <div class="wrapper">

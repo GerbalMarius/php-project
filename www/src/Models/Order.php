@@ -13,6 +13,19 @@ class Order extends Model{
     public static  $APPROVED = 3;
     public static  $CANCELED = 4;
 
+    public static function getTypeName($id){
+        switch ($id){
+            case 1:
+                return "<p>PATEIKTAS</p>";
+            case 2:
+                return "<p style='color:blue;'>REZERVUOTAS</p>";
+            case 3:
+                    return "<p class='success'>PATVIRTINTAS</p>";
+            case 4:
+                return "<p style='color:red;'>ATŠAUKTAS</p>";
+        }
+    }
+
     public function status(){
         return $this->belongsTo(OrderStatus::class);
     }

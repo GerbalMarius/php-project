@@ -1,4 +1,6 @@
 <?php
+
+use Models\Order;
 session_start();
 require __DIR__ . "/config.php";
 require __DIR__ . '/../vendor/autoload.php';
@@ -13,6 +15,7 @@ if (!isset($_SESSION['user_id']) || !is_active_user($_SESSION['user_id'])) {
 }
 
 $user = User::find($_SESSION["user_id"]);
+$orders = $user->orders;
 ?>
 <!DOCTYPE html>
 <html lang="lt-LT">
@@ -46,5 +49,44 @@ $user = User::find($_SESSION["user_id"]);
     }
     ?>
     </h2>
+    <br>
+    <br>
+    <div class="wrapper" style="margin-top:100px;">
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="4">Užsakymai</th>
+            </tr>
+            <tr>
+                <th>Data</th>
+                <th>Kiekis</th>
+                <th>Pilna kaina</th>
+                <th>Būsena</th>
+            </tr>
+            <tr>
+            <?php
+            if ($orders->count() <= 0) {
+                echo "<td colspan='4' style='color:red; font-weight:bold;'>Užsakymų nėra.</td>";
+                    echo "</tr>";
+            }else{
+                foreach ($orders as $order) {
+                    echo "<td>{$order->date}</td>";
+                    echo "<td>{$order->amount}</td>";
+                    echo "<td>{$order->total_price}€</td>";
+                    $statusName = Order::getTypeName($order->order_status_id);
+                    if ($order->order_status_id === Order::$RESERVED) {
+                        $orderDate = date('Y-m-d', strtotime($order->date . ' +1 week'));
+                        echo "<td>{$statusName} iki $orderDate</td>";
+                    }
+                    else{
+                        echo "<td>{$statusName}</td>";
+                    }
+                    echo "</tr>";
+                }
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 </body>
 </html>
