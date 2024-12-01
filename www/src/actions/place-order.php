@@ -39,14 +39,10 @@ if (!empty($_SESSION["cart"])) {
         ]);
     }
 
-    $cart->full_price = $totalPrice;
-    $cart->save();
 
-    $user->carts()->save($cart);
-
-    Order::create(
+   $order = Order::create(
         [
-            "order_status_id" => 1,
+            "order_status_id" => $user->wallet->balance >= $totalPrice ? Order::$PLACED : Order::$RESERVED,
             "date" => date("Y-m-d"),
             "amount" => $totalAmount,
             "total_price" => $totalPrice,
@@ -54,6 +50,12 @@ if (!empty($_SESSION["cart"])) {
             "cart_id" => $cart->id
         ]
         );
+    
+        $cart->full_price = $totalPrice;
+        $cart->order_id = $order->id;
+        $cart->save();
+    
+        $user->carts()->save($cart);
     $_SESSION["cart"] = [];
     unset($_SESSION["cart"]);
     header("Location: /www/src/cart-page.php?success=true");

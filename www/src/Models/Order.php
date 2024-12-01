@@ -8,6 +8,11 @@ class Order extends Model{
     public $timestamps = false;
     protected $fillable = ["order_status_id","date", "amount", "total_price","user_id", "cart_id"];
 
+    public static  $PLACED = 1;
+    public static  $RESERVED = 2;
+    public static  $APPROVED = 3;
+    public static  $CANCELED = 4;
+
     public function status(){
         return $this->belongsTo(OrderStatus::class);
     }

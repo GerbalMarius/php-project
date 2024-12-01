@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+require "utils.php";
+$url = "/www/src";
+if (empty($_SESSION['user_id']) || !is_active_user($_SESSION['user_id']) || !has_role($_SESSION["user_id"], "MANAGER")) {
+    header("Location: $url");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

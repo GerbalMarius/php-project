@@ -2,9 +2,13 @@
 session_start();
 require "utils.php";
 $url = "/www/src/account-page.php";
+$managerUrl = "/www/src/manager-page.php";
 
-if (isset($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_role($_SESSION["user_id"], "USER")) {
+if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_role($_SESSION["user_id"], "USER")) {
     header("Location: $url");
+    exit;
+}else if (!empty($_SESSION['user_id']) && is_active_user($_SESSION['user_id']) && has_role($_SESSION["user_id"], "MANAGER")) {
+    header("Location: $managerUrl");
     exit;
 }
 

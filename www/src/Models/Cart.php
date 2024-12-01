@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model{
     public $timestamps = false;
-    protected $fillable = ["full_price","cart_date", "user_id"];
+    protected $fillable = ["full_price","cart_date", "user_id", "order_id"];
 
     public function user(){
         return $this->belongsTo(User::class);

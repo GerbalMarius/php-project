@@ -110,8 +110,15 @@ $filteredProducts = $products->filter(function ($product) use (
         </form>
         
     </h1>
-    <img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
-    style="text-decoration:none; right:40px;" class="smaller-img-top-right"></a>
+    <?php
+    if (empty(isset($_SESSION['user_id'])) || has_role($_SESSION['user_id'], 'USER')) {
+        echo '<img src="src/images/cart.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/cart-page.php"
+        style="text-decoration:none; right:40px;" class="smaller-img-top-right"></a>';
+     }else{
+        echo '<img src="src/images/add-circle.svg" alt="cart" class="smaller-img-top-right" style="margin-right: 40px;"><a href="src/products-form.php"
+        style="text-decoration:none; right:40px;" class="smaller-img-top-right"></a>';
+     };
+    ?>
     <img src="src/images/acount-icon.svg" alt="face" class="smaller-img-top-right"><a href="src/login-page.php"
         style="text-decoration:none" class="smaller-img-top-right"></a>
     <?php

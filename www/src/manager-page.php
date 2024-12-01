@@ -7,7 +7,7 @@ use Models\User;
 
 $url = "/www/src";
 
-if (!isset($_SESSION['user_id']) || !is_active_user($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || !is_active_user($_SESSION['user_id']) || !has_role($_SESSION['user_id'], "MANAGER")) {
     header("Location: $url");
     exit;
 }
@@ -26,7 +26,7 @@ $user = User::find($_SESSION["user_id"]);
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-        <title>Mano paskyra</title>
+        <title>Vadybininko langas</title>
 </head>
 <body>
     <h1 class="form-heading">Paskyros informacija</h1><img src="images/home-icon.svg" alt="home" class="smaller-img-top-left"> <a class="smaller-img-top-left" href="../src"></a>
@@ -35,16 +35,8 @@ $user = User::find($_SESSION["user_id"]);
     <h2 class="form-heading">El. paštas: <?php echo "{$user->email}"; ?></h2>
     <h2 class="form-heading">Telefono numeris: <?php echo "{$user->telephone_number}"; ?></h2>
     <h2 class="form-heading">Gimimo data: <?php echo "{$user->birthdate}"; ?></h2>
-    <h2 class="form-heading">Piniginės likutis: <?php echo "{$user->wallet->balance}€"; ?> 
-    <form action="actions/add_funds.php" method="post">
-    <input name="funds" class="form-input-smaller" placeholder="Papildyti piniginę." type="number" min="0" max="1000">
-    <input class="form-submit-smaller" type="submit" value="Patvirtinti">
-    </form>
-    <?php 
-    if (isset($_GET["success"])) {
-        echo "<p class = 'success'>Piniginė sėkmingai papildyta</p>";
-    }
-    ?>
-    </h2>
+    <h2 class="form-heading">Varotojų užsakymai:</h2>
+    <br>
+    <a href="orders-page.php" class="form-submit-smaller" style="text-decoration:none; position:relative; left:-41rem;">Peržiūrėti užsakymus</a>
 </body>
 </html>
