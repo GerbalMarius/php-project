@@ -8,7 +8,7 @@ $capsule->addConnection([
     'host' => 'localhost',
     'database' => 'it_proj',
     'username' => 'root',
-    'password'=> 'archmanjaro1109',
+    'password'=> 'placeholders123',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',

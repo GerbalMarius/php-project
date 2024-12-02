@@ -193,6 +193,7 @@ $filteredProducts = $products->filter(function ($product) use (
         $disable = $isSoldOut ? 'disabled' : '';
         $cursorStyle = $isSoldOut ? 'cursor:default;' : '';
         $text = $isSoldOut ? 'Išparduota' : 'Į krepšelį';
+        $action = "src/actions/to-cart.php";
         $price_text = "<p class = 'item-text-price'>" . calculate_discount($product->unit_price, $product->discount) . "€/vnt</p>";
         if ($product->discount >= 1) {
             $price_text .= "<p class='item-text-discount'>" . round($product->discount, 1) . "% Nuolaida</p>";
@@ -208,8 +209,10 @@ $filteredProducts = $products->filter(function ($product) use (
         echo "<p class = 'item-text-general'>{$product->model} </p>";
         echo Product::image_str($product->id);
         echo $price_text;
+        if (!empty($_SESSION['user_id'])){
         $text = has_role($_SESSION['user_id'], "MANAGER") ? "Papildyti prekę" : $text;
-        $action = has_role($_SESSION['user_id'], "MANAGER") ? "src/actions/update-product.php" :"src/actions/to-cart.php";
+        $action = has_role($_SESSION['user_id'], "MANAGER") ? "src/actions/update-product.php" :$action;
+        }
         echo "<form action='$action' method='post'>";
         echo "<label for='quantity-{$product->id}' class='item-label'>Kiekis:</label>";
         echo "<input type='number' id='quantity-{$product->id}' name='quantity' value='0' min='1' max={$product->total_units} class='form-input-smaller' style='margin-left:0rem !important; width:10rem !important; $cursorStyle' $disable>";
