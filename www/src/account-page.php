@@ -51,7 +51,7 @@ $orders = $user->orders;
     </h2>
     <br>
     <br>
-    <div class="wrapper" style="margin-top:100px;">
+    <div class="wrapper" style="margin-top:400px;">
     <table>
         <tbody>
             <tr>
