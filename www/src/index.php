@@ -9,14 +9,19 @@
 $products = Product::all();
 
 // Initialize filters
+if (!empty($_POST['search'])) {
+    $_SESSION['search'] = $_POST['search'];
+}else{
+    unset($_SESSION['search']);
+}
 $searchQuery = isset($_POST['search']) ? test_input($_POST['search']) : '';
 $selectedManufacturers = $_POST['manufacturer'] ?? [];
 $selectedTitles = $_POST['title'] ?? [];
 $selectedModels = $_POST['model'] ?? [];
 $selectedCategories = $_POST['category'] ?? [];
 $selectedPrice = isset($_POST['filter_price']) ? floatval($_POST['filter_price']) : null;
-$searchWords = array_filter(explode(' ', $searchQuery)); // Remove any empty words
-// Apply filters
+$searchWords = array_filter(array: explode(' ', $searchQuery));
+ // Remove any empty words
 $filteredProducts = $products->filter(function ($product) use (
     $selectedManufacturers,
     $selectedTitles,
@@ -25,6 +30,7 @@ $filteredProducts = $products->filter(function ($product) use (
     $searchWords,
     $selectedPrice
 ) {
+    
 
     if (!empty($searchWords)) {
         $matchesAllWords = true;
@@ -35,6 +41,7 @@ $filteredProducts = $products->filter(function ($product) use (
                 $product->model,
                 $product->category
             ];
+            $_SESSION["search_str"][] = $word;
             $matchesWord = false;
             foreach ($fieldsToSearch as $field) {
                 if (stripos($field, $word) !== false) {
@@ -106,7 +113,7 @@ $filteredProducts = $products->filter(function ($product) use (
         }
         ?>
         <form action="" method="post">
-        <input type="text" class="form-input" name="search" placeholder="Įveskite paieškos terminą." style="margin:0 auto; margin-left:40rem; position:relative; top:-15px;width:25rem;">
+        <input type="text" value="<?php echo $_SESSION['search'] ?? "" ?>" class="form-input" name="search" placeholder="Įveskite paieškos terminą." style="margin:0 auto; margin-left:40rem; position:relative; top:-15px;width:25rem;">
         <button class="form-submit-smaller" style="width:60px !important; padding: 10px; position:relative; border-radius:20px; left:0px; top:-6px;">
             <img src="src/images/search.svg" alt="search" class="search-thumb">
         </button>
